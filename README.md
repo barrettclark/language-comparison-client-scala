@@ -14,4 +14,4 @@ Although I want to stay as stdlib as possible, Scala tastes different enough fro
 
 First you'll want to clone the server and get it running: https://github.com/barrettclark/location-comparison-server
 
-    sbt run
+    ./sbt
