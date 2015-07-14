@@ -1,8 +1,8 @@
 package client
 
 import argonaut._, Argonaut._
-import com.twitter.finagle.{Httpx, Service}
 import com.twitter.finagle.httpx
+import com.twitter.finagle.{Httpx, Service}
 import com.twitter.util.{Await,Future}
 import scalaz._
 
@@ -10,8 +10,12 @@ import scalaz._
 object Client extends App {
   import Util._
 
+  val payload = getPayload()
+  val _ = Await.ready(payload)
+  println(payload)
+
   def getPayload(): Future[Payload] = {
-    val client = new Httpx.Client().newService("localhost:9292")
+    val client = Httpx.Client().newService("localhost:9292")
     val request = httpx.Request(httpx.Method.Get, "/")
     client(request) flatMap { resp =>
       bufToString(resp.content).decodeEither[Payload] match {
@@ -20,8 +24,4 @@ object Client extends App {
       }
     }
   }
-
-  val payload = getPayload()
-  Await.ready(payload)
-  println(payload)
 }
