@@ -1,6 +1,10 @@
+import com.typesafe.sbt.SbtNativePackager._
+
 name := "client"
 
 version := "1.0"
+
+packageArchetype.java_application
 
 scalaVersion := "2.11.6"
 
