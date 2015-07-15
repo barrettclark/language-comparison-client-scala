@@ -9,10 +9,12 @@ import scalaz._
 // The HTTP Client
 object Client extends App {
   import Util._
-
-  val payload = getPayload()
-  val _ = Await.ready(payload)
-  println(payload)
+  
+  for (i <- 1 to 100) {
+    val payload = getPayload()
+    val _ = Await.ready(payload)
+    println(payload)
+  }
 
   def getPayload(): Future[Payload] = {
     val client = Httpx.Client().newService("localhost:9292")
